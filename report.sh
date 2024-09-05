@@ -21,7 +21,7 @@ is_accusing=$(docker logs --tail $tail $container | grep accusing | tail -1 | gr
 registered=$(docker logs --tail $tail $container | grep "Registered:" | tail -1 | grep -c "Registered: true")
 sent=$(docker logs --tail $tail $container | grep -a "Challenges sent to Nilchain" | tail -1 | awk '{print $NF}')
 url=$(ps aux | grep nillion | grep -v grep | awk -F '--rpc-endpoint ' '{print $2}' | awk '{print $1}')
-version=$(docker ps -a --no-trunc | grep $folder | awk -F 'accuser:' '{print $2}' | awk '{print $1}')
+version=$(docker ps -a --no-trunc | grep nillion | awk -F 'accuser:' '{print $2}' | awk '{print $1}')
 
 case $docker_status$is_accusing in
   running1) status=ok; message="last=$last_challenge_sec sent=$sent" ;;
