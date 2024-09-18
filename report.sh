@@ -48,7 +48,8 @@ cat << EOF
    { "key":"sent","value":"$sent" },
    { "key":"is_accusing","value":"$is_accusing" },
    { "key":"registered","value":"$registered" },
-   { "key":"url","value":"$url" }
+   { "key":"url","value":"$url" },
+   { "key":"version","value":"$version" }
   ]
 }
 EOF
