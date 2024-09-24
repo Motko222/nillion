@@ -1,6 +1,6 @@
 #!/bin/bash
 
-path=$(echo $(cd -- $(dirname -- "${BASH_SOURCE[0]}") && pwd)
+path=$(cd -- $(dirname -- "${BASH_SOURCE[0]}") && pwd)
 source $path/config
 cd $path
 
