@@ -20,7 +20,7 @@ fi
 
 #read -p "Block? " block
 #docker run -d -v ~/nillion/accuser:/var/tmp nillion/verifier:$VERSION accuse --rpc-endpoint $rpc --block-start $block
-docker run -v ./nillion/accuser:/var/tmp nillion/verifier:$VERSION verify --rpc-endpoint $rpc
+docker run -d -v ~/nillion/accuser:/var/tmp nillion/verifier:$VERSION verify --rpc-endpoint $rpc
 
 container=$(docker ps | grep nillion | awk '{print $NF}')
 docker logs -n 200 -f $container
