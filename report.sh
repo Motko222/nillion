@@ -18,14 +18,14 @@ last_challenge=$(docker logs --tail $tail $container | grep -a "Challenges sent 
 [ -z $last_challenge ] && last_challenge_sec=never || last_challenge_sec="$(( $(date +%s) - $(date -d $last_challenge +%s) ))s"
 local_height=$(docker logs --tail $tail $container | grep -a "Sent block @ height" | tail -1 | awk '{print $NF}')
 is_accusing=$(docker logs --tail $tail $container | grep accusing | tail -1 | grep -c "Accuser IS accusing")
-registered=$(docker logs --tail $tail $container | grep "Registered:" | tail -1 | grep -c "Registered: true")
+verifying=$(docker logs --tail $tail $container | grep "Verifying" | tail -1 | grep -c "Verifying: true")
 sent=$(docker logs --tail $tail $container | grep -a "Challenges sent to Nilchain" | tail -1 | awk '{print $NF}')
 url=$(ps aux | grep nillion | grep -v grep | awk -F '--rpc-endpoint ' '{print $2}' | awk '{print $1}')
-version=$(docker ps -a --no-trunc | grep nillion | awk -F 'accuser:' '{print $2}' | awk '{print $1}')
+version=$(docker ps -a --no-trunc | grep nillion | awk -F 'verifier:' '{print $2}' | awk '{print $1}')
 
-case $docker_status$is_accusing in
+case $docker_status$verifying in
   running1) status=ok; message="last=$last_challenge_sec sent=$sent" ;;
-  running0) status=warning; message="not accusing height=$local_height" ;;
+  running0) status=warning; message="not verifying, height=$local_height" ;;
   *) status="error"; message="docker not running" ;;
 esac
 
@@ -47,7 +47,7 @@ cat << EOF
    { "key":"last_challenge_sec","value":"$last_challenge_sec" },
    { "key":"sent","value":"$sent" },
    { "key":"is_accusing","value":"$is_accusing" },
-   { "key":"registered","value":"$registered" },
+   { "key":"verifying","value":"$verifying" },
    { "key":"url","value":"$url" },
    { "key":"version","value":"$version" }
   ]
