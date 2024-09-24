@@ -1,7 +1,8 @@
 #!/bin/bash
 
-folder=$(cd -- $(dirname -- "${BASH_SOURCE[0]}") && pwd)
-cd $folder
+path=$(echo $(cd -- $(dirname -- "${BASH_SOURCE[0]}") && pwd)
+source $path/config
+cd $path
 
 echo "------------------------"
 cat rpc | nl
