@@ -25,7 +25,7 @@ version=$(docker ps -a --no-trunc | grep nillion | awk -F 'verifier:' '{print $2
 
 case $docker_status$verifying in
   running1) status=ok; message="last=$last_challenge_sec sent=$sent" ;;
-  running0) status=warning; message="not verifying, height=$local_height" ;;
+  running0) status=warning; message="not verifying, sent=$sent" ;;
   *) status="error"; message="docker not running" ;;
 esac
 
