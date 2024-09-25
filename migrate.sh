@@ -3,7 +3,7 @@
 path=$(cd -- $(dirname -- "${BASH_SOURCE[0]}") && pwd)
 folder=$(echo $path | awk -F/ '{print $NF}')
 
-read -p "New id (e.g. nillion-1) ?" id
+read -p "New id (e.g. nillion-1) ? " id
 
 cd $path
 ./stop.sh
