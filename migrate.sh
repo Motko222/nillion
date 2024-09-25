@@ -18,4 +18,5 @@ git clone https://github.com/Motko222/nillion-x
 mv nillion-x $id
 cd $id
 chmod +x *.sh
+./start.sh
 
